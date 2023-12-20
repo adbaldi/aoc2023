@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+import os
+import re
+import sys
+
+def processInput (_input):
+
+  _sum = 0;
+  for _line in _input:
+    _line = _line.strip()
+
+    if not _line:
+      print("*******Emtpy Line Found at: ", _x)
+      next
+
+    _sum += getCalibration(_line)
+
+  _p1,_p2 = "",""
+
+
+  print("Day  Part 1: ", _sum)
+  print("Day  Part 2: ", _p2)
+
+
+def getCalibration(_line):
+  _first = re.match("^[^\d]*(\d).*$", _line)
+  _last = re.match("^.*(\d)[^\d]*$", _line)
+  if _first and _last:
+    return int(_first.group(1) + _last.group(1))
+  else:
+    print("First: ", _first.groups(), "Last:", _last.groups(), "Line:", _line)
+
+def main(_filePath):
+    
+  if not os.path.isfile(_filePath):
+    print(_filePath + " does not appear to be a file")
+    exit(1)
+
+  with open(_filePath) as _inputFile:
+    _input = _inputFile.readlines()
+
+  processInput(_input)
+
+if __name__ == '__main__':
+    
+  filePath = "input"
+
+  if len(sys.argv) > 1:
+    filePath = sys.argv[1]
+
+  main(filePath)
