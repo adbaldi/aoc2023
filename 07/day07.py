@@ -23,10 +23,7 @@ def processInput (_input):
   for _line in _input:
     _x += 1
     _line = _line.strip()
-    _line = _line.replace("A","Z")
-    _line = _line.replace("K","Y")
-    _line = _line.replace("Q","X")
-    _line = _line.replace("J","W")
+    _line = _line.translate(str.maketrans('TJQKA', f'ABCDE'))
 
     if not _line:
         print("*******Emtpy Line Found at: ", _x)
